@@ -21,4 +21,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.22" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Events\" />
+    <Folder Include="Views\Menu\" />
+    <Folder Include="Views\Reservations\" />
+    <Folder Include="Views\Visitors\" />
+    <Folder Include="Views\Orders\" />
+  </ItemGroup>
+
 </Project>

@@ -1,73 +1,71 @@
 Table Users {
-  id integer [primary key]
-  username varchar
-  role varchar
-  created_at timestamp
-  password int
+  Id int [primary key]
+  Username varchar
+  Email varchar
+  Role varchar
+  Password varchar
+  Created_at timestamp
 }
 
 Table Events { 
-  Number integer [primary key]
+  EventNumber int [primary key]
   Title varchar
   Type varchar
   TimeEvent timestamp
+  Created_at timestamp
 }
 
-
 Table Reservation {
-  Number integer [primary key]
+  ReservationNumber int [primary key]
+  UserId int
   Name varchar
   Phone varchar
   Date timestamp
   Hour timestamp
-  Gamers integer
-  body text [note: 'Content of the post']
+  GamersCount int
+  Body text
   Status varchar
-  created_at timestamp
+  Created_at timestamp
   Comment varchar
 }
 
 Table Menu {
-  NumberOrder integer [primary key]
-  Food varchar
-  Drink varchar
-  Cocktaile varchar
-  Price currency
-  created_at timestamp
+  MenuId int [primary key]
+  Category varchar
+  ItemName varchar
+  Price decimal
+  Created_at timestamp
 }
 
 Table BoardGames {
-  Id integer [primary key]
+  Id int [primary key]
   Name varchar
   Type varchar
-  Gamers int
+  RequiredGamers int
   Availability varchar
 }
 
-Table Orders {
-  Id integer [primary key]
-  NumberOrder integer
-  ClientId integer
-  GameId integer
-  EventId integer
-  created_at timestamp
-}
-
 Table Posetiteli {
-  Id integer [primary key]
+  Id int [primary key]
   Name varchar
   Phone varchar
-  DateTime timestamp
-  ReservationId integer
+  ReservationId int
+  DateAndTime timestamp
 }
 
+Table Orders {
+  Id int [primary key]
+  OrderNumber int
+  ClientId int
+  GameId int
+  EventId int
+  MenuId int
+  Created_at timestamp
+}
 
-Ref: "BoardGames"."Id" < "Orders"."GameId"
-
-Ref: "Events"."Number" < "Orders"."EventId"
-
-Ref: "Posetiteli"."Id" < "Orders"."ClientId"
-
-Ref: "Posetiteli"."ReservationId" < "Reservation"."Number"
-
-Ref: "Menu"."NumberOrder" < "Orders"."NumberOrder"
+Ref: Orders.GameId > BoardGames.Id
+Ref: Orders.EventId > Events.EventNumber
+Ref: Orders.ClientId > Posetiteli.Id
+Ref: Posetiteli.ReservationId > Reservation.ReservationNumber
+Ref: Orders.MenuId > Menu.MenuId
+Ref: Reservation.UserId > Users.Id
